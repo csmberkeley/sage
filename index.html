@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>Sage | Teaching Tips from CS Mentors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="thirdparty/normalize.css">
+  <link rel="stylesheet" href="thirdparty/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/thematic.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="nav">
+      <div class="title logo">Sage</div>
+      <div class="search-container">
+        <label for="search-input">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </label>
+        <input id="search-input" placeholder="Search...">
+      </div>
+    </div>
+    <div class="menu">
+      <a v-on:click="toggleMenu" class="jump-to" :class="{active: showMenu}" href="#">{{toggleLabel}}</a>
+      <div class="menu-content" :class="{active: showMenu}">
+        <div v-for="category in categories">
+          <h5>{{category.title}}</h5>
+          <ul>
+            <li v-for="sub in category.sub">{{sub}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="flow-container" :class="{flipped: frontFlipping}">
+        <div class="flow-flip">
+          <div class="front">
+            <div class="full-height" v-if="useFront">
+              <h4 class="flow-q">{{currPoint.text}}</h4>
+              <div v-if="currPointId != 1" v-on:click.stop="flowNext(1)" class="back-button"><i class="fa fa-repeat" aria-hidden="true"></i> Restart</div>
+              <div class="flow-options">
+                <a class="btn flow-button" v-for="option in currPoint.options" v-on:click.stop="flowNext(option.next)">
+                  <div class="option-text">{{option.text}}</div>
+                  <div v-if="option.subtext" class="option-sub">{{option.subtext}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="back">
+            <div class="full-height" v-if="!useFront">
+              <h4 class="flow-q">{{currPoint.text}}</h4>
+              <div v-if="currPointId != 1" v-on:click.stop="flowNext(1)" class="back-button"><i class="fa fa-repeat" aria-hidden="true"></i> Restart</div>
+              <div class="flow-options">
+                <a class="btn flow-button" v-for="option in currPoint.options" v-on:click.stop="flowNext(option.next)">
+                  <div class="option-text">{{option.text}}</div>
+                  <div v-if="option.subtext" class="option-sub">{{option.subtext}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="thirdparty/vue.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/flow.js"></script>
+</body>
