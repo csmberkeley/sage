@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="content">
-      <div class="flow-container" :class="{flipped: frontFlipping}">
+      <div v-if="globalState.showFlow" class="flow-container" :class="{flipped: frontFlipping}">
         <div class="flow-flip">
           <div class="front">
             <div class="full-height" v-if="useFront">
@@ -63,11 +63,14 @@
           </div>
         </div>
       </div>
+      <div class="tips">
+      </div>
     </div>
   </div>
 
-
   <script src="thirdparty/vue.js"></script>
+  <script src="thirdparty/lodash.core.min.js"></script>
+  <script src="js/globalState.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/flow.js"></script>
 </body>

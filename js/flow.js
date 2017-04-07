@@ -18,6 +18,7 @@ const flow = new Vue({
     }
   },
   data: {
+    globalState: globalState,
     currPointId: 1,
     frontFlipping: false,
     useFront: true,
