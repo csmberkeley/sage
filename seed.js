@@ -40,6 +40,23 @@ const csvStream = csv()
     }
   })
   .on('end', function() {
+    tips.forEach(function(tip) {
+      const rawText = tip.text;
+      tip.title = '';
+      tip.subtexts= [];
+
+      const level1 = rawText.split('%');
+      tip.title = level1[0];
+
+      for (var i = 1; i < level1.length; i++) {
+        const level2 = level1[i].split('`');
+        tip.subtexts.push({level: 1, text: level2[0]});
+
+        for (var j = 1; j < level2.length; j++) {
+          tip.subtexts.push({level: 2, text: level2[j]});
+        }
+      }
+    });
     const json = JSON.stringify(tips);
     fs.writeFile('js/tips.json', json, 'utf8', function() {
       console.log('written to js/tips.json')

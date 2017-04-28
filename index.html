@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/thematic.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tip.css">
 </head>
 <body>
   <div id="app">
@@ -63,7 +64,15 @@
           </div>
         </div>
       </div>
-      <div class="tips">
+      <div class="tipList">
+        <div class="tip-container" v-for="tip in filteredTips()">
+          <div class="tip-title">{{tip.title}}</div>
+          <div class="tip-subtext-container">
+            <div class="tip-subtext" :class="{subtext2: subtext.level == 2}" v-for="subtext in tip.subtexts">
+              {{subtext.text}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -73,4 +82,5 @@
   <script src="js/globalState.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/flow.js"></script>
+  <script src="js/tipList.js"></script>
 </body>

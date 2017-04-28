@@ -96,6 +96,7 @@
   padding-top: 200px;
   text-align: center;
   position: relative;
+  height: 500px;
 }
 .flow-container.flipped .flow-flip {
   transform: rotateX(-180deg);
