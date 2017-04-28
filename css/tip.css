@@ -3,6 +3,10 @@
   border: 1px solid #9E9E9E;
   margin: 12px 0;
   padding: 16px;
+  transition: all 0.4s;
+}
+.tip-container:hover {
+  border-color: #1ab394;
 }
 .tip-title {
   font-size: 1.7rem;

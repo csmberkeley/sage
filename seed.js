@@ -56,6 +56,7 @@ const csvStream = csv()
           tip.subtexts.push({level: 2, text: level2[j]});
         }
       }
+      tip.text = tip.text.toLowerCase();
     });
     const json = JSON.stringify(tips);
     fs.writeFile('js/tips.json', json, 'utf8', function() {

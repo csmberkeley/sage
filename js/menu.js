@@ -1,8 +1,27 @@
+const titleToCategory = {
+  'Silence': 'silent',
+  'Logistics': 'logistic',
+  'Imbalance': 'difference',
+  'Structure': 'structure',
+  'Atmosphere': 'atmosphere',
+  'First day': 'firstday',
+  'Asking Questions': 'questions'
+};
+
 const menu = new Vue({
   el: '.menu',
   methods: {
     toggleMenu: function() {
       this.showMenu = !this.showMenu
+    },
+    jump: function(sub) {
+      console.log('jumping');
+      this.globalState.currCategory = titleToCategory[sub];
+      this.globalState.currSearch = '';
+      this.globalState.showTips = true;
+      this.globalState.showSearch = false;
+      this.showMenu = false;
+      setTimeout(function() {$('html,body').animate({scrollTop: $('.tipList').offset().top - 100}); }, 200);
     }
   },
   computed: {
@@ -14,6 +33,7 @@ const menu = new Vue({
     }
   },
   data: {
+    globalState,
     showMenu: false,
     categories: [
       {

@@ -17,20 +17,27 @@
   <div id="app">
     <div class="nav">
       <div class="title logo">Sage</div>
-      <div class="search-container">
+      <div class="search-container" :class="{active: globalState.showSearch}">
         <label for="search-input">
           <i class="fa fa-search" aria-hidden="true"></i>
         </label>
-        <input id="search-input" placeholder="Search...">
+        <input v-model="keywords" id="search-input" v-on:keyup.enter="runSearch()" placeholder="Search...">
+        <div class="title nav-title">
+          <span v-on:click="globalState.showSearch = true" class="show-search">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <i class="show-search fa fa-search fa-2x" aria-hidden="true"></i>
+          </span>
+          <h4>Tips {{tipLabel}}</h4>
+        </div>
       </div>
     </div>
     <div class="menu">
-      <a v-on:click="toggleMenu" class="jump-to" :class="{active: showMenu}" href="#">{{toggleLabel}}</a>
+      <a v-on:click.stop.prevent="toggleMenu" class="jump-to" :class="{active: showMenu}" href="#">{{toggleLabel}}</a>
       <div class="menu-content" :class="{active: showMenu}">
         <div v-for="category in categories">
           <h5>{{category.title}}</h5>
           <ul>
-            <li v-for="sub in category.sub">{{sub}}</li>
+            <li class="jump" v-on:click="jump(sub)" v-for="sub in category.sub">{{sub}}</li>
           </ul>
         </div>
       </div>
@@ -41,9 +48,9 @@
           <div class="front">
             <div class="full-height" v-if="useFront">
               <h4 class="flow-q">{{currPoint.text}}</h4>
-              <div v-if="currPointId != 1" v-on:click.stop="flowNext(1)" class="back-button"><i class="fa fa-repeat" aria-hidden="true"></i> Restart</div>
+              <div v-if="currPointId != 1" v-on:click.stop="flowNext()" class="back-button"><i class="fa fa-repeat" aria-hidden="true"></i> Restart</div>
               <div class="flow-options">
-                <a class="btn flow-button" v-for="option in currPoint.options" v-on:click.stop="flowNext(option.next)">
+                <a class="btn flow-button" v-for="option in currPoint.options" v-on:click.stop="flowNext(option)">
                   <div class="option-text">{{option.text}}</div>
                   <div v-if="option.subtext" class="option-sub">{{option.subtext}}</div>
                 </a>
@@ -53,9 +60,9 @@
           <div class="back">
             <div class="full-height" v-if="!useFront">
               <h4 class="flow-q">{{currPoint.text}}</h4>
-              <div v-if="currPointId != 1" v-on:click.stop="flowNext(1)" class="back-button"><i class="fa fa-repeat" aria-hidden="true"></i> Restart</div>
+              <div v-if="currPointId != 1" v-on:click.stop="flowNext()" class="back-button"><i class="fa fa-repeat" aria-hidden="true"></i> Restart</div>
               <div class="flow-options">
-                <a class="btn flow-button" v-for="option in currPoint.options" v-on:click.stop="flowNext(option.next)">
+                <a class="btn flow-button" v-for="option in currPoint.options" v-on:click.stop="flowNext(option)">
                   <div class="option-text">{{option.text}}</div>
                   <div v-if="option.subtext" class="option-sub">{{option.subtext}}</div>
                 </a>
@@ -64,7 +71,7 @@
           </div>
         </div>
       </div>
-      <div class="tipList">
+      <div class="tipList" v-if="globalState.showTips">
         <div class="tip-container" v-for="tip in filteredTips()">
           <div class="tip-title">{{tip.title}}</div>
           <div class="tip-subtext-container">
@@ -79,8 +86,10 @@
 
   <script src="thirdparty/vue.js"></script>
   <script src="thirdparty/lodash.core.min.js"></script>
+  <script src="thirdparty/jquery-3.2.1.min.js"></script>
   <script src="js/globalState.js"></script>
   <script src="js/menu.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/flow.js"></script>
   <script src="js/tipList.js"></script>
 </body>

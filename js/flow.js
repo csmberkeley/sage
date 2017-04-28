@@ -6,21 +6,32 @@ const flow = new Vue({
     }
   },
   methods: {
-    flowNext: function(next) {
-      if (next) {
+    flowNext: function(option) {
+      if (!option) {
+        /* set up for going back */
+        option = {next: 1};
+      }
+      if (option.next) {
         this.frontFlipping = !this.frontFlipping;
         const self = this;
         setTimeout(function() {
-          self.currPointId = next;
+          self.currPointId = option.next;
           self.useFront = !self.useFront;
         }, 400);
+      } else if (option.category) {
+        this.globalState.currCategory = option.category;
+        this.globalState.currSearch = '';
+        this.globalState.showTips = true;
+        this.globalState.showSearch = false;
+        setTimeout(function() {$('html,body').animate({scrollTop: $('.tipList').offset().top - 100}); }, 200);
       }
-    }
+    },
   },
   data: {
-    globalState: globalState,
+    globalState,
     currPointId: 1,
     frontFlipping: false,
+    hiding: false,
     useFront: true,
     points: {
       1: {
@@ -41,13 +52,16 @@ const flow = new Vue({
         text: 'What problem are you facing?',
         options: [
           {
-            text: 'Silent Section'
+            text: 'Silent Section',
+            category: 'silent'
           },
           {
-            text: 'Logistical Issue'
+            text: 'Logistical Issue',
+            category: 'logistic'
           },
           {
-            text: 'Students with different levels of understanding'
+            text: 'Students with different levels of understanding',
+            category: 'difference'
           }
         ]
       },
@@ -55,16 +69,20 @@ const flow = new Vue({
         text: 'What advice you looking for?',
         options: [
           {
-            text: 'The structure of a section'
+            text: 'The structure of a section',
+            category: 'structure'
           },
           {
             text: 'Setting the section atmosphere',
+            category: 'atmosphere'
           },
           {
-            text: 'First day tips'
+            text: 'First day tips',
+            category: 'firstday'
           },
           {
-            text: 'Asking students good questions'
+            text: 'Asking students good questions',
+            category: 'questions'
           }
         ]
       },

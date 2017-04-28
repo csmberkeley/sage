@@ -9,11 +9,33 @@
   padding: 0 25px;
   background: #f3f3f3;
   border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
+.nav-title {
+  margin-top: 20px;
+  text-align: center;
+}
+.nav-title .fa {
+  margin-top: -16px;
+  color: #1ab394;
+  vertical-align: middle;
+}
+.nav-title h4 {
+  display: inline-block;
+  margin: 0 12px;
+}
+.show-search {
+  cursor: pointer;
 }
 .search-container {
   position: relative;
   margin: 0 auto;
-  width: 50%;
+  width: 600px;
+  transition: all 0.4s;
+  transform: translateY(-80px);
+}
+.search-container.active {
+  transform: translateY(0);
 }
 .search-container label {
   color: #1ab394;
@@ -33,8 +55,8 @@
 }
 .logo {
   float: left;
-  margin-top: 12px;
-  font-size: 32px;
+  margin-top: 16px;
+  font-size: 2.5rem;
 }
 .menu {
   position: fixed;
@@ -70,6 +92,11 @@
 }
 .menu-content.active {
   transform: translateX(0px);
+}
+.jump {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #1ab394;
 }
 
 .content {

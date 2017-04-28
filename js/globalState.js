@@ -1,8 +1,10 @@
 const globalState = {
   showFlow: true,
-  showResults: false,
-  showCategory: false,
-  tips: []
+  showSearch: true,
+  showTips: false,
+  tips: [],
+  currCategory: '',
+  currSearch: ''
 };
 
 const req = new XMLHttpRequest();
