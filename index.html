@@ -32,12 +32,12 @@
       </div>
     </div>
     <div class="menu">
-      <a v-on:click.stop.prevent="toggleMenu" class="jump-to" :class="{active: showMenu}" href="#">{{toggleLabel}}</a>
+      <a v-on:click.stop.prevent="toggleMenu" class="title jump-to" :class="{active: showMenu}" href="#" v-html="toggleLabel"></a>
       <div class="menu-content" :class="{active: showMenu}">
         <div v-for="category in categories">
-          <h5>{{category.title}}</h5>
+          <h5 class="jump-title">{{category.title}}</h5>
           <ul>
-            <li class="jump" v-on:click="jump(sub)" v-for="sub in category.sub">{{sub}}</li>
+            <li class="jump" v-on:click="jump(sub)" v-for="sub in category.sub">{{sub}}<span class="arrow">&gt;</span></li>
           </ul>
         </div>
       </div>

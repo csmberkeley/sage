@@ -27,9 +27,9 @@ const menu = new Vue({
   computed: {
     toggleLabel: function() {
       if (this.showMenu) {
-        return 'X';
+        return '&times;';
       }
-      return 'Jump to ...';
+      return 'Jump to...';
     }
   },
   data: {
