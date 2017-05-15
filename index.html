@@ -16,7 +16,7 @@
 <body>
   <div id="app">
     <div class="nav">
-      <div class="title logo">Sage</div>
+      <div v-on:click="resetGlobalState()" class="title logo">Sage</div>
       <div class="search-container" :class="{active: globalState.showSearch}">
         <label for="search-input">
           <i class="fa fa-search" aria-hidden="true"></i>
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="menu">
-      <a v-on:click.stop.prevent="toggleMenu" class="title jump-to" :class="{active: showMenu}" href="#" v-html="toggleLabel"></a>
+      <a v-on:click.stop.prevent="toggleMenu" class="jump-to" :class="{active: showMenu}" href="#" v-html="toggleLabel"></a>
       <div class="menu-content" :class="{active: showMenu}">
         <div v-for="category in categories">
           <h5 class="jump-title">{{category.title}}</h5>
@@ -80,6 +80,9 @@
             </div>
           </div>
         </div>
+        <div v-if="foundNone" class="tip-container">
+          <div class="tip-title">Couldn't find any matching tips</div>
+        </div>
       </div>
     </div>
   </div>
@@ -89,7 +92,7 @@
   <script src="thirdparty/jquery-3.2.1.min.js"></script>
   <script src="js/globalState.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/search.js"></script>
+  <script src="js/nav.js"></script>
   <script src="js/flow.js"></script>
   <script src="js/tipList.js"></script>
 </body>

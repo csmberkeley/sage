@@ -9,7 +9,7 @@ const categoryToTitle = {
 };
 
 const search = new Vue({
-  el: '.search-container',
+  el: '.nav',
   methods: {
     runSearch: function() {
       this.globalState.showSearch = false;
@@ -17,6 +17,9 @@ const search = new Vue({
       this.globalState.currCategory = '';
       this.globalState.showTips = true;
       setTimeout(function() {$('html,body').animate({scrollTop: $('.tipList').offset().top - 100}); }, 200);
+    },
+    resetGlobalState: function() {
+      location.reload();
     }
   },
   computed: {

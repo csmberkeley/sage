@@ -54,6 +54,7 @@
   padding: 0 40px;
 }
 .logo {
+  cursor: pointer;
   float: left;
   margin-top: 16px;
   font-size: 2.5rem;
@@ -81,7 +82,8 @@
   transform: translateX(0px);
 }
 .jump-to:hover {
-  color: #80CBC4;
+  color: #fff;
+  text-decoration: underline;
 }
 .jump-to.active {
   left: 12px;
@@ -91,7 +93,6 @@
   padding: 0px 10px;
 }
 .jump-to.active:hover {
-  border-color: #80CBC4;
 }
 
 .menu-content {
@@ -109,6 +110,7 @@
 .jump-title {
   color: #fff;
   margin-bottom: 1rem;
+  opacity: 0.8;
 }
 .jump {
   margin: 0;
@@ -116,7 +118,6 @@
   padding-left: 1rem;
   cursor: pointer;
   color: #fff;
-  opacity: 0.8;
   transition: all 0.3s;
   border: 2px solid transparent;
   list-style-type: none;
